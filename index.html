@@ -208,6 +208,8 @@ ric neumann. brazilian. musician-ish, comic reader, vinyl digger, and a person w
 <h2>side quest</h2>
 <div class="box"><b>LAST RIDER</b> <span class="dim">tiny ASCII isometric action game</span><br>
 <a href="https://github.com/alonewman/last-rider" target="_blank" rel="noopener noreferrer">source</a> <a href="https://last-rider.vercel.app" target="_blank" rel="noopener noreferrer">play</a><a class="cap" href="https://last-rider.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="play Last Rider"><img src="media/banner_h.webp" alt="LAST RIDER, ASCII action adventure: a knight on a horse raising a sword before a giant moon" width="960" height="448" decoding="async"></a><div class="bn" id="bn" role="button" tabindex="0" aria-label="play the trailer"><img src="media/trailer_poster.webp" alt="trailer poster" width="640" height="360" loading="lazy" decoding="async"><span class="pl">&#9654; trailer</span></div></div>
+<div class="box"><b>AS MINAS ESQUECIDAS</b> <span class="dim">ASCII first-person horror for phones in landscape</span><br>
+<a href="https://github.com/alonewman/soulm" target="_blank" rel="noopener noreferrer">source</a> <a href="https://soulm.vercel.app" target="_blank" rel="noopener noreferrer">play</a><a class="cap" href="https://soulm.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="play As Minas Esquecidas"><img src="media/minas_banner_h.webp" alt="AS MINAS ESQUECIDAS, ASCII horror: a dark corridor lined with glowing teal runes and a key in the distance" width="960" height="448" loading="lazy" decoding="async"></a><div class="bn" id="bn2" role="button" tabindex="0" aria-label="play the trailer"><img src="media/minas_poster.webp" alt="trailer poster" width="640" height="360" loading="lazy" decoding="async"><span class="pl">&#9654; trailer</span></div></div>
 
 <h2>elsewhere</h2>
 <p class="links">
@@ -218,7 +220,7 @@ ric neumann. brazilian. musician-ish, comic reader, vinyl digger, and a person w
 <a href="https://letterboxd.com/ricf/" target="_blank" rel="noopener noreferrer">letterboxd</a></p>
 
 <hr>
-<footer>built on a tiny budget of bytes. no trackers, no cookies, one page. the trailer only loads when you press play.</footer>
+<footer>built on a tiny budget of bytes. no trackers, no cookies, one page. trailers only load when you press play.</footer>
 </main>
 <script>
 (function(){
@@ -269,5 +271,5 @@ cn.textContent=n?"CH "+n:"";cn.classList.add("on");clearTimeout(t1);t1=setTimeou
 tv.title="click me";
 })();
 
-(function(){var b=document.getElementById("bn");function go(){if(b.classList.contains("v"))return;b.classList.add("v");var v=document.createElement("video");v.controls=true;v.autoplay=true;v.playsInline=true;v.poster="media/trailer_poster.webp";v.src="media/trailer5.mp4";b.innerHTML="";b.appendChild(v);v.play&&v.play().catch(function(){})}b.onclick=go;b.onkeydown=function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}}})();
+(function(){function mk(id,src,poster){var b=document.getElementById(id);if(!b)return;function go(){if(b.classList.contains("v"))return;b.classList.add("v");var v=document.createElement("video");v.controls=true;v.autoplay=true;v.playsInline=true;v.poster=poster;v.src=src;b.innerHTML="";b.appendChild(v);v.play&&v.play().catch(function(){})}b.onclick=go;b.onkeydown=function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}}}mk("bn","media/trailer5.mp4","media/trailer_poster.webp");mk("bn2","media/minas_trailer.mp4","media/minas_poster.webp")})();
 </script></body></html>
