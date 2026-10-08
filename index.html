@@ -49,7 +49,7 @@ footer{margin-top:40px;color:var(--dim);font-size:.85em}
 .tv.c3 .bars{display:block}.tv.c2 .crt{filter:sepia(.9) saturate(2.4) hue-rotate(-22deg) brightness(1.1)}.tv.on-st .st{display:block}
 .tv .chn{position:absolute;top:5px;right:7px;z-index:4;font-size:11px;font-weight:bold;color:var(--hot);text-shadow:0 0 4px #000,1px 1px #000;opacity:0;transition:opacity .4s}.tv .chn.on{opacity:1}
 .tv.off i.a{background:#2d4f6e;box-shadow:none}.tv.hit{animation:vh .3s steps(3)}@keyframes vh{0%{transform:translateY(0)}30%{transform:translateY(-2px) skewX(2deg)}60%{transform:translateY(1px)}100%{transform:none}}
-.tr{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.tr figure{margin:0;flex:none;text-align:center}.tr video{width:100%;aspect-ratio:9/16;object-fit:cover;background:#02060a;border:1px solid var(--line);border-radius:4px;display:block}
+.bn{position:relative;display:block;width:100%;max-width:360px;margin:14px auto 0;cursor:pointer;border:1px solid var(--line);border-radius:4px;overflow:hidden;background:#02060a;box-shadow:0 0 24px rgba(74,168,255,.12)}.bn img,.bn video{display:block;width:100%;height:auto;aspect-ratio:360/511}.bn:after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.16) 0 1px,transparent 1px 3px)}.bn video{background:#02060a;position:relative;z-index:2}.bn.v:after{display:none}.bn .pl{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);z-index:3;background:rgba(5,11,20,.82);border:1px solid var(--hot);color:var(--hot);padding:7px 14px;font-size:.85em;white-space:nowrap;animation:b 1.6s steps(1) infinite}.bn:hover .pl{background:var(--hot);color:var(--bg)}
 </style></head><body><main>
 <pre class="banner">
  ____  ___ ____
@@ -206,7 +206,7 @@ ric neumann. brazilian. musician-ish, comic reader, vinyl digger, and a person w
 
 <h2>side quest</h2>
 <div class="box"><b>LAST RIDER</b> <span class="dim">tiny ASCII isometric action game</span><br>
-<a href="https://github.com/alonewman/last-rider" target="_blank" rel="noopener noreferrer">source</a> <a href="https://last-rider.vercel.app" target="_blank" rel="noopener noreferrer">play</a><div class="tr"><figure><video controls playsinline preload="none" poster="media/poster3.jpg" src="media/trailer3.mp4"></video><figcaption>trailer :: the campaign</figcaption></figure><figure><video controls playsinline preload="none" poster="media/poster2.jpg" src="media/trailer2.mp4"></video><figcaption>trailer :: the first ride</figcaption></figure></div></div>
+<a href="https://github.com/alonewman/last-rider" target="_blank" rel="noopener noreferrer">source</a> <a href="https://last-rider.vercel.app" target="_blank" rel="noopener noreferrer">play</a><div class="bn" id="bn" role="button" tabindex="0" aria-label="play the trailer"><img src="media/banner.webp" alt="ASCII cover art: a knight on a horse raising a sword before a giant moon and a colossus" width="360" height="511" decoding="async"><span class="pl">&#9654; play trailer</span></div></div>
 
 <h2>elsewhere</h2>
 <p class="links">
@@ -217,7 +217,7 @@ ric neumann. brazilian. musician-ish, comic reader, vinyl digger, and a person w
 <a href="https://letterboxd.com/ricf/" target="_blank" rel="noopener noreferrer">letterboxd</a></p>
 
 <hr>
-<footer>built on a tiny budget of bytes. no trackers, no cookies, one page. videos only load when you press play.</footer>
+<footer>built on a tiny budget of bytes. no trackers, no cookies, one page. the trailer only loads when you press play.</footer>
 </main>
 <script>
 (function(){
@@ -264,4 +264,6 @@ if(n==1){tv.classList.remove("off","c2","c3");cap.textContent=base}
 cn.textContent=n?"CH "+n:"";cn.classList.add("on");clearTimeout(t1);t1=setTimeout(function(){cn.classList.remove("on")},1500)};
 tv.title="click me";
 })();
+
+(function(){var b=document.getElementById("bn");function go(){if(b.classList.contains("v"))return;b.classList.add("v");var v=document.createElement("video");v.controls=true;v.autoplay=true;v.playsInline=true;v.poster="media/banner.webp";v.src="media/trailer4.mp4";b.innerHTML="";b.appendChild(v);v.play&&v.play().catch(function(){})}b.onclick=go;b.onkeydown=function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}}})();
 </script></body></html>
