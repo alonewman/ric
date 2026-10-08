@@ -33,7 +33,7 @@ li:before{content:"> ";color:var(--dim)}
 .me{color:var(--blue)}.bot{color:var(--hot)}
 footer{margin-top:40px;color:var(--dim);font-size:.85em}
 @media(prefers-reduced-motion:reduce){.cur{animation:none}}
-.hero{display:flex;gap:16px;align-items:flex-start;margin-top:8px}.hero .txt{flex:1;min-width:0}.hero .txt p{margin:0}.hero figure{margin:0;flex:0 0 128px;text-align:center}figcaption{font-size:.72em;color:var(--dim);margin-top:4px}.crt{position:relative;width:128px;margin:0;overflow:hidden;border-radius:4px;animation:fl 5s infinite}.crt:after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.14) 0 1px,transparent 1px 3px),radial-gradient(ellipse at center,transparent 70%,rgba(2,8,16,.35) 100%)}svg#me{display:block;width:100%;filter:url(#duo) drop-shadow(.6px 0 0 rgba(255,70,110,.22)) drop-shadow(-.6px 0 0 rgba(70,200,255,.25)) drop-shadow(0 0 4px rgba(80,255,180,.2))}@keyframes fl{0%,94%,100%{opacity:1}95%{opacity:.82}97%{opacity:.95}}</style></head><body><main>
+.hero{display:flex;gap:16px;align-items:flex-start;margin-top:8px}.hero .txt{flex:1;min-width:0}.hero .txt p{margin:0}.hero figure{margin:0;flex:0 0 128px;text-align:center}figcaption{font-size:.72em;color:var(--dim);margin-top:4px}.crt{position:relative;width:128px;margin:0;overflow:hidden;border-radius:4px;animation:fl 5s infinite}.crt:after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.14) 0 1px,transparent 1px 3px),radial-gradient(ellipse at center,transparent 70%,rgba(2,8,16,.35) 100%)}svg#me{display:block;width:100%;filter:url(#duo) drop-shadow(.6px 0 0 rgba(255,70,110,.22)) drop-shadow(-.6px 0 0 rgba(70,200,255,.25)) drop-shadow(0 0 4px rgba(80,255,180,.2))}@keyframes fl{0%,94%,100%{opacity:1}95%{opacity:.82}97%{opacity:.95}}#eg{cursor:pointer}#toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:rgba(10,30,50,.95);border:1px solid var(--hot);color:var(--hot);padding:8px 14px;font-size:.85em;opacity:0;transition:opacity .25s;pointer-events:none;z-index:9;max-width:90vw;text-align:center}#toast.on{opacity:1}</style></head><body><main>
 <pre class="banner">
  ____  ___ ____
 |  _ \|_ _/ ___|
@@ -44,7 +44,8 @@ footer{margin-top:40px;color:var(--dim);font-size:.85em}
 
 <div class="hero">
 <div class="txt"><p><span class="dim">$</span> whoami<br>
-ric neumann. brazilian. musician-ish, comic reader, vinyl digger, and a person who automates things so they can go start a new hobby.<span class="cur"></span></p></div>
+ric neumann. brazilian. musician-ish, comic reader, vinyl digger, and a person who automates things so they can go start a new <span id="eg">hobby</span>.<span class="cur"></span></p><p id="dev" hidden style="margin:10px 0 0"><a href="tetris.html" style="border:1px solid var(--hot);padding:6px 10px;display:inline-block">&gt; play tetris</a></p>
+</div>
 <figure><div class="crt"><svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="duo" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values=".33 .59 .11 0 0 .33 .59 .11 0 0 .33 .59 .11 0 0 0 0 0 1 0" result="g"/><feComponentTransfer in="g" result="d"><feFuncR type="table" tableValues="0.04 0.24 0.60 0.88"/><feFuncG type="table" tableValues="0.10 0.46 0.88 1"/><feFuncB type="table" tableValues="0.22 0.62 0.78 0.86"/></feComponentTransfer><feComposite in="d" in2="SourceGraphic" operator="arithmetic" k1="0" k2=".55" k3=".45" k4="0"/></filter></svg><svg id="me" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 320" role="img" aria-label="cartoon of me and my dogs Cacau and Mada" stroke-linejoin="round" stroke-linecap="round">
 <defs>
 <filter id="mw" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="4"/><feDisplacementMap in="SourceGraphic" scale="5"/></filter>
@@ -197,6 +198,11 @@ ric neumann. brazilian. musician-ish, comic reader, vinyl digger, and a person w
 <footer>built on a tiny budget of bytes. no trackers, no cookies, one file.</footer>
 </main>
 <script>
+(function(){var e=document.getElementById('eg'),d=document.getElementById('dev'),T=document.createElement('div'),n=0,tm;T.id='toast';document.body.appendChild(T);
+function say(m){T.textContent=m;T.className='on';clearTimeout(tm);tm=setTimeout(function(){T.className=''},1600)}
+var u=false;try{u=localStorage.getItem('dev')=='1'}catch(x){}
+if(u)d.hidden=false;
+e.onclick=function(){if(d.hidden===false){say('you are already a developer');return}n++;var left=7-n;if(left<=0){d.hidden=false;try{localStorage.setItem('dev','1')}catch(x){}say('you are now a developer!')}else if(left<=4)say(left+' taps left to become a developer')}})();
 (function(){var n=12,h=document.getElementById('hob'),c=document.getElementById('hc');
 h.onclick=function(){n++;c.textContent=n+' logged [+1]'};
 var B={jazz:'Steely Dan, Ed Motta',fusion:'Mahavishnu Orchestra, Weather Report, Return to Forever',metal:'Death, Angra, Iron Maiden, Dream Theater, Ozzy Osbourne, AC/DC',prog:'Rush, Yes, King Crimson, Dream Theater'};
