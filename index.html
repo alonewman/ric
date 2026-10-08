@@ -214,17 +214,34 @@ ric neumann. brazilian. musician-ish, comic reader, vinyl digger, and a person w
 <script>
 (function(){
 var T=[["vx","top5v","vinyl","a"],["cx","top5","comics","c"],["fx","top5f","movies","f"]],C={},sh=document.getElementById("shelf"),cur=null;
-try{C=JSON.parse(localStorage.getItem("cv2")||"{}")}catch(e){}
-function sv(){try{localStorage.setItem("cv2",JSON.stringify(C))}catch(e){}}
+try{C=JSON.parse(localStorage.getItem("cv3")||"{}")}catch(e){}
+function sv(){try{localStorage.setItem("cv3",JSON.stringify(C))}catch(e){}}
 function tile(t,k){var h=0,i;for(i=0;i<t.length;i++)h=(h*31+t.charCodeAt(i))%360;var hh=150+h%80,w=t.split(/\s+/).filter(function(x){return x.length>2||/\d/.test(x)}).slice(0,2).map(function(x){return x[0]}).join("").toUpperCase();var d=document.createElement("div");d.className="cov"+(k==="a"?" sq":"");d.style.background="linear-gradient(150deg,hsl("+hh+",45%,26%),hsl("+(hh+40)+",50%,12%))";d.textContent=w;return d}
 function put(d,u){if(!u)return;var m=new Image();m.alt="";m.onload=function(){d.textContent="";d.appendChild(m)};m.src=u}
-function get(li,d){var k=li.dataset.k,q=li.dataset.q,id=k+q;if(id in C){put(d,C[id]);return}
-var u=k==="c"?"https://openlibrary.org/search.json?limit=1&fields=cover_i&q="+encodeURIComponent(q):"https://itunes.apple.com/search?limit=1&media="+(k==="a"?"music&entity=album":"movie&entity=movie")+"&term="+encodeURIComponent(q);
-fetch(u).then(function(r){return r.json()}).then(function(j){var r=k==="c"?(j.docs&&j.docs[0]&&j.docs[0].cover_i?"https://covers.openlibrary.org/b/id/"+j.docs[0].cover_i+"-S.jpg":""):(j.results&&j.results[0]?j.results[0].artworkUrl100.replace("100x100bb","200x200bb"):"");C[id]=r;sv();put(d,r)}).catch(function(){})}
+var W={"Hedwig and the Angry Inch":"en:Hedwig_and_the_Angry_Inch_(film)","Durval Discos":"pt:Durval_Discos","Who Framed Roger Rabbit":"en:Who_Framed_Roger_Rabbit","The Worst Person in the World":"en:The_Worst_Person_in_the_World_(film)","Boogie Nights":"en:Boogie_Nights","Revolver Beatles":"en:Revolver_(Beatles_album)","Somewhere in Time Iron Maiden":"en:Somewhere_in_Time_(Iron_Maiden_album)","Eat 'Em and Smile David Lee Roth":"en:Eat_%27Em_and_Smile","Awake Dream Theater":"en:Awake_(Dream_Theater_album)","2112 Rush":"en:2112_(album)","Combate no Cotidiano Larcenet":"fr:Le_Combat_ordinaire","Asterios Polyp":"en:Asterios_Polyp","Thorgal":"fr:Thorgal","Akira Otomo":"en:Akira_(manga)","Black Hammer Lemire":"en:Black_Hammer_(comics)"},P={};
+function wk(q){var w=W[q];if(!w)return Promise.resolve("");var l=w.split(":");return fetch("https://"+l[0]+".wikipedia.org/api/rest_v1/page/summary/"+l[1]).then(function(r){return r.json()}).then(function(j){var u=j.thumbnail&&j.thumbnail.source||"";return u.replace(/\/\d+px-/,"/160px-")}).catch(function(){return""})}
+function alt(k,q){var u=k==="c"?"https://openlibrary.org/search.json?limit=1&fields=cover_i&q="+encodeURIComponent(q):"https://itunes.apple.com/search?limit=1&media="+(k==="a"?"music&entity=album":"movie&entity=movie")+"&term="+encodeURIComponent(q);
+return fetch(u).then(function(r){return r.json()}).then(function(j){return k==="c"?(j.docs&&j.docs[0]&&j.docs[0].cover_i?"https://covers.openlibrary.org/b/id/"+j.docs[0].cover_i+"-M.jpg":""):(j.results&&j.results[0]?j.results[0].artworkUrl100.replace("100x100bb","200x200bb"):"")}).catch(function(){return""})}
+function res(li){var k=li.dataset.k,q=li.dataset.q,id=k+q;if(C[id])return Promise.resolve(C[id]);if(P[id])return P[id];
+P[id]=wk(q).then(function(u){return u||alt(k,q)}).then(function(u){if(u){C[id]=u;sv();var m=new Image();m.src=u}return u});return P[id]}
+function get(li,d){res(li).then(function(u){put(d,u)})}
+function warm(){T.forEach(function(p){[].forEach.call(document.getElementById(p[1]).children,res)})}
+setTimeout(warm,600);
 function show(p){var src=document.getElementById(p[1]);sh.innerHTML="";var h=document.createElement("h3");h.textContent="top 5 "+(p[2]==="vinyl"?"records":p[2]);sh.appendChild(h);var ol=document.createElement("ol");
 [].forEach.call(src.children,function(li){var n=document.createElement("li"),t=li.firstChild.textContent.trim(),d=tile(li.dataset.q.replace(/ (Beatles|Iron Maiden|David Lee Roth|Dream Theater|Rush|Larcenet|Otomo|Lemire)$/,""),li.dataset.k),w=document.createElement("div");
 w.innerHTML="<b></b><i></i>";w.firstChild.textContent=t;w.lastChild.textContent=li.querySelector("i").textContent;n.appendChild(d);n.appendChild(w);ol.appendChild(n);get(li,d)});
 sh.appendChild(ol);sh.className="box on"}
 T.forEach(function(p){document.getElementById(p[0]).onclick=function(){var same=cur===p[0];T.forEach(function(q){document.getElementById(q[0]).classList.remove("on2")});if(same){cur=null;sh.className="box";return}cur=p[0];this.classList.add("on2");show(p)}})
 })();
+(function(){var e=document.getElementById('eg'),d=document.getElementById('dev'),T=document.createElement('div'),n=0,tm;T.id='toast';document.body.appendChild(T);
+function say(m){T.textContent=m;T.className='on';clearTimeout(tm);tm=setTimeout(function(){T.className=''},1600)}
+var u=false;try{u=localStorage.getItem('dev')=='1'}catch(x){}
+if(u)d.hidden=false;
+e.onclick=function(){if(d.hidden===false){say('you are already a developer');return}n++;var left=7-n;if(left<=0){d.hidden=false;try{localStorage.setItem('dev','1')}catch(x){}say('you are now a developer!')}else if(left<=4)say(left+' taps left to become a developer')}})();
+(function(){var n=12,h=document.getElementById('hob'),c=document.getElementById('hc');
+h.onclick=function(){n++;c.textContent=n+' logged [+1]'};
+var B={jazz:'Steely Dan, Ed Motta',fusion:'Mahavishnu Orchestra, Weather Report, Return to Forever',metal:'Death, Angra, Iron Maiden, Dream Theater, Ozzy Osbourne, AC/DC',prog:'Rush, Yes, King Crimson, Dream Theater'};
+var bs=document.querySelectorAll('[data-g]'),o=document.getElementById('bands');
+bs.forEach(function(b){b.onclick=function(){bs.forEach(function(x){x.classList.remove('on')});b.classList.add('on');o.innerHTML='<span class="dim">&gt; '+b.dataset.g+':</span> '+B[b.dataset.g]}});
+var l=document.getElementById('ld'),i=0;setInterval(function(){i=(i+1)%11;l.textContent='█'.repeat(i)+'░'.repeat(10-i)},350)})();
 </script></body></html>
