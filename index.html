@@ -273,6 +273,7 @@ tv.title="click me";
 })();
 
 (function(){function mk(id,src,poster){var b=document.getElementById(id);if(!b)return;function go(){if(b.classList.contains("v"))return;b.classList.add("v");var v=document.createElement("video");v.controls=true;v.autoplay=true;v.playsInline=true;v.poster=poster;v.src=src;b.innerHTML="";b.appendChild(v);v.play&&v.play().catch(function(){})}b.onclick=go;b.onkeydown=function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}}}mk("bn","media/trailer5.mp4","media/trailer_poster.webp");mk("bn2","media/deephold_trailer.mp4","media/deephold_poster.webp")})();
+</script>
 <script>
 (function(){var p=document.querySelector('.hero .txt p'),f=document.querySelector('.top figure');if(!p||!f)return;
 function al(){f.style.marginRight='0';var r=document.createRange();r.selectNodeContents(p);var m=0;[].forEach.call(r.getClientRects(),function(x){if(x.width>1&&x.right>m)m=x.right});
